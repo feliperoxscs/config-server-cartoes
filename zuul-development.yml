@@ -1,0 +1,36 @@
+server:
+  port: 9000
+
+spring:
+  application:
+    name: zuul
+
+hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 11000
+
+ribbon:
+  ConnectTimeout: 10000
+  ReadTimeout: 10000
+
+zuul:
+  ignoredServices: '*'
+  routes:
+    cliente:
+      path: /cliente/**
+      serviceId: cliente
+      stripPrefix: false
+      sensitiveHeaders: Cookie, Set-Cookie, Authorization
+    cartao:
+      path: /cartao/**
+      serviceId: cartao
+      stripPrefix: false
+      sensitiveHeaders: Cookie, Set-Cookie, Authorization
+    pagamentoCreate:
+      path: /pagamento/**
+      serviceId: pagamento
+      stripPrefix: false
+      sensitiveHeaders: Cookie, Set-Cookie, Authorization
+    pagamentoGet:
+      path: /pagamentos/**
+      serviceId: pagamento
+      stripPrefix: false
+      sensitiveHeaders: Cookie, Set-Cookie, Authorization
